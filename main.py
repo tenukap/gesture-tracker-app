@@ -1,11 +1,12 @@
 import cv2
 import mediapipe as mp
-from mediapipe.tasks import python
 from mediapipe.tasks.python import vision
 
-cap = cv2.VideoCapture(0)
+cap = cv2.VideoCapture(1)
 # model declariation 
 model = "models/Hand Landmarker Task - Google AI Guide.task"
+
+
 
 #model processing initializaiton
 BaseOptions = mp.tasks.BaseOptions
@@ -14,27 +15,36 @@ HandLandmarkerOptions = mp.tasks.vision.HandLandmarkerOptions
 HandLandmarkerResult = mp.tasks.vision.HandLandmarkerResult
 VisionRunningMode = mp.tasks.vision.RunningMode
 
+
 def print_result(result: HandLandmarkerResult, output_image: mp.Image, timestamp_ms: int):
    print('hand landmarker result: {}'.format(result))
 
-
 options = HandLandmarkerOptions(
-    base_options = BaseOptions(model ),
-    running_mode = VisionRunningMode.LiveStream,
+    base_options = BaseOptions(model_asset_path = model),
+    running_mode = VisionRunningMode.LIVE_STREAM,
     result_callback=print_result
 )
 
 #initialize landMarker 
 landMarker = HandLandmarker.create_from_options(options)
 
-while(0):
-    frame = cap.read()
 
-    HSV = cv2.cvtColor(frame, cv2.COLOR_BAYER_BG2BGR)
+# looping thorugh the frames 
+while True:
+   sucess, frame = cap.read() 
+   if not sucess:
+    print("failded to open Camera")
+    break 
+   RGB_Frame = cv2.cvtColor(frame,cv2.COLOR_BGR2RGB)
+   mp_image = mp.Image(image_format=mp.ImageFormat.SRGB, data=RGB_Frame)
 
-    mp_image = mp.Image(
-        image_format=mp.ImageFormat.SRGB,
-        data = HSV
-    )
+   frame_timestamp_ms = int(cv2.getTickCount()/cv2.getTickFrequency() * 100)
+   landMarker.detect_async(mp_image,frame_timestamp_ms)
+   cv2.imshow("Camera", frame)
+   if cv2.waitKey(1) & 0xFF == ord('q'):
+       break
 
 
+cap.release()
+cv2.destroyAllWindows()
+landMarker.close()
