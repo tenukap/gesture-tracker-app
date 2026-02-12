@@ -31,7 +31,18 @@ def print_result(result: HandLandmarkerResult, output_image: mp.Image, timestamp
        print("processing hand index : " ,index_hands)
 
        hand_landmarks = result.hand_landmarks[index_hands]
-       
+       handedness_info = result.handedness[index_hands][0]
+       hand_type = handedness_info.category_name
+       confidence_score = handedness_info.score 
+
+       print(" hand type ", hand_type)
+       print("confidence score ", confidence_score)
+
+       thumb_tip = hand_landmarks[4]
+
+       print("thump position ")
+
+       print(" thump tip -> x", thumb_tip.x , "thumb tip -> y ", thumb_tip.y, "thumb_tip -> z " ,thumb_tip.z)
 
 
 
