@@ -7,7 +7,6 @@ cap = cv2.VideoCapture(1)
 model = "models/Hand Landmarker Task - Google AI Guide.task"
 
 
-
 #model processing initializaiton
 BaseOptions = mp.tasks.BaseOptions
 HandLandmarker = mp.tasks.vision.HandLandmarker
@@ -17,12 +16,31 @@ VisionRunningMode = mp.tasks.vision.RunningMode
 
 
 def print_result(result: HandLandmarkerResult, output_image: mp.Image, timestamp_ms: int):
-   print('hand landmarker result: {}'.format(result))
+#detecting hand 
+    if len(result.hand_landmarks) == 0:
+       print("---hand not detected---")
+       return
+    print("----hand detected----")
 
-options = HandLandmarkerOptions(
+#get number of hands detected 
+    total_hands = len(result.hand_landmarks)
+    print(total_hands)
+
+# get the index fingers of the hands 
+    for index_hands in range(total_hands):
+       print("processing hand index : " ,index_hands)
+
+       hand_landmarks = result.hand_landmarks[index_hands]
+       
+
+
+
+options = HandLandmarkerOptions( 
     base_options = BaseOptions(model_asset_path = model),
     running_mode = VisionRunningMode.LIVE_STREAM,
+    num_hands = 2 ,
     result_callback=print_result
+    
 )
 
 #initialize landMarker 
