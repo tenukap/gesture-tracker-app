@@ -14,6 +14,14 @@ HandLandmarkerOptions = mp.tasks.vision.HandLandmarkerOptions
 HandLandmarkerResult = mp.tasks.vision.HandLandmarkerResult
 VisionRunningMode = mp.tasks.vision.RunningMode
 
+#finger movement detection function 
+def movement_fingers(CMC,MCP,IP,TIP):
+   if IP.x >0.5 and  MCP.x >0.5 and CMC.x >0.5 and TIP.x > 0.5 :
+          print("thumb is moving to the left")
+   elif IP.x ==0.5 and MCP.x == 0.5 and  CMC.x == 0.5 and TIP.x == 0.5 :
+        print("thumb is in the middle ") 
+   else:
+          print("thumb is moving to right")
 
 def print_result(result: HandLandmarkerResult, output_image: mp.Image, timestamp_ms: int):
 #detecting hand 
@@ -51,12 +59,9 @@ def print_result(result: HandLandmarkerResult, output_image: mp.Image, timestamp
        print(" thump tip -> x", thumb_ip.x , "thumb tip -> y ", thumb_ip.y, "thumb_tip -> z " ,thumb_ip.z) 
        print(" thump tip -> x", thumb_tip.x , "thumb tip -> y ", thumb_tip.y, "thumb_tip -> z " ,thumb_tip.z)
 
-       if thumb_ip.x | thumb_MCP.x | thumb_CMC.x | thumb_tip.x > 0.5 :
-          print("thumb is moving to the right")
-       elif thumb_ip.x | thumb_MCP.x | thumb_CMC.x | thumb_tip.x== 0.5:
-        print("thumb is in the middle ") 
-       else:
-          print("thumb is moving to left")
+       movement_fingers(CMC=thumb_CMC,MCP=thumb_MCP,IP=thumb_ip,TIP=thumb_tip)
+
+
 
 
 options = HandLandmarkerOptions( 
