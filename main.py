@@ -26,7 +26,7 @@ def print_result(result: HandLandmarkerResult, output_image: mp.Image, timestamp
     total_hands = len(result.hand_landmarks)
     print(total_hands)
 
-# get the index fingers of the hands 
+# get the index fingers of the hands and printing results 
     for index_hands in range(total_hands):
        print("processing hand index : " ,index_hands)
 
@@ -38,10 +38,24 @@ def print_result(result: HandLandmarkerResult, output_image: mp.Image, timestamp
        print(" hand type ", hand_type)
        print("confidence score ", confidence_score)
 
+      #handmarks of thumb 
+       thumb_CMC = hand_landmarks[1]
+       thumb_MCP = hand_landmarks[2]
+       thumb_ip = hand_landmarks[3]  
        thumb_tip = hand_landmarks[4]
 
        print("thump position ")
 
+       if thumb_ip.x & thumb_MCP.x & thumb_CMC.x & thumb_tip.x > 0.5 :
+          print("thumb is moving to the right")
+       elif thumb_ip.x & thumb_MCP.x & thumb_CMC.x & thumb_tip.x == 0.5:
+        print("thumb is in the middle ") 
+       else:
+          print("thumb is moving to left")
+
+       print(" thump tip -> x", thumb_CMC.x , "thumb tip -> y ", thumb_CMC.y, "thumb_tip -> z " ,thumb_CMC.z)
+       print(" thump tip -> x", thumb_MCP.x , "thumb tip -> y ", thumb_MCP.y, "thumb_tip -> z " ,thumb_MCP.z)
+       print(" thump tip -> x", thumb_ip.x , "thumb tip -> y ", thumb_ip.y, "thumb_tip -> z " ,thumb_ip.z) 
        print(" thump tip -> x", thumb_tip.x , "thumb tip -> y ", thumb_tip.y, "thumb_tip -> z " ,thumb_tip.z)
 
 
@@ -73,7 +87,7 @@ while True:
    if cv2.waitKey(1) & 0xFF == ord('q'):
        break
 
-
+# closing everything 
 cap.release()
 cv2.destroyAllWindows()
 landMarker.close()
