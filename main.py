@@ -46,18 +46,17 @@ def print_result(result: HandLandmarkerResult, output_image: mp.Image, timestamp
 
        print("thump position ")
 
-       if thumb_ip.x & thumb_MCP.x & thumb_CMC.x & thumb_tip.x > 0.5 :
-          print("thumb is moving to the right")
-       elif thumb_ip.x & thumb_MCP.x & thumb_CMC.x & thumb_tip.x == 0.5:
-        print("thumb is in the middle ") 
-       else:
-          print("thumb is moving to left")
-
        print(" thump tip -> x", thumb_CMC.x , "thumb tip -> y ", thumb_CMC.y, "thumb_tip -> z " ,thumb_CMC.z)
        print(" thump tip -> x", thumb_MCP.x , "thumb tip -> y ", thumb_MCP.y, "thumb_tip -> z " ,thumb_MCP.z)
        print(" thump tip -> x", thumb_ip.x , "thumb tip -> y ", thumb_ip.y, "thumb_tip -> z " ,thumb_ip.z) 
        print(" thump tip -> x", thumb_tip.x , "thumb tip -> y ", thumb_tip.y, "thumb_tip -> z " ,thumb_tip.z)
 
+       if thumb_ip.x | thumb_MCP.x | thumb_CMC.x | thumb_tip.x > 0.5 :
+          print("thumb is moving to the right")
+       elif thumb_ip.x | thumb_MCP.x | thumb_CMC.x | thumb_tip.x== 0.5:
+        print("thumb is in the middle ") 
+       else:
+          print("thumb is moving to left")
 
 
 options = HandLandmarkerOptions( 
