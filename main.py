@@ -52,14 +52,41 @@ def print_result(result: HandLandmarkerResult, output_image: mp.Image, timestamp
        thumb_ip = hand_landmarks[3]  
        thumb_tip = hand_landmarks[4]
 
-       print("thump position ")
+      # handmarks of index finger
+       IndexFinger_MCP = hand_landmarks[5]
+       IndexFinger_PIP = hand_landmarks[6]
+       IndexFinger_DIP = hand_landmarks[7]
+       IndexFinger_Tip = hand_landmarks[8]
 
-       print(" thump tip -> x", thumb_CMC.x , "thumb tip -> y ", thumb_CMC.y, "thumb_tip -> z " ,thumb_CMC.z)
-       print(" thump tip -> x", thumb_MCP.x , "thumb tip -> y ", thumb_MCP.y, "thumb_tip -> z " ,thumb_MCP.z)
-       print(" thump tip -> x", thumb_ip.x , "thumb tip -> y ", thumb_ip.y, "thumb_tip -> z " ,thumb_ip.z) 
-       print(" thump tip -> x", thumb_tip.x , "thumb tip -> y ", thumb_tip.y, "thumb_tip -> z " ,thumb_tip.z)
+       #handmarks of middle finger
+       MiddleFinger_MCP = hand_landmarks[9]
+       MiddleFinger_PIP = hand_landmarks[10]
+       MiddleFinger_DIP = hand_landmarks[11]
+       MiddleFinger_Tip = hand_landmarks[12]
+
+       #handmarks of ring finger 
+       RingFinger_MCP = hand_landmarks[13]
+       RingFinger_PIP = hand_landmarks[14]
+       RingFinger_DIP = hand_landmarks[15]
+       RingFinger_Tip = hand_landmarks[16]
+
+       #handmark of pinky finger 
+       PinkyFinger_MCP = hand_landmarks[17]
+       PinkyFinger_PIP = hand_landmarks[18]
+       PinkyFinger_DIP = hand_landmarks[19]
+       PinkyFinger_Tip = hand_landmarks[20]
+    #    print("thump position ")
+
+    #    print(" thump tip -> x", thumb_CMC.x , "thumb tip -> y ", thumb_CMC.y, "thumb_tip -> z " ,thumb_CMC.z)
+    #    print(" thump tip -> x", thumb_MCP.x , "thumb tip -> y ", thumb_MCP.y, "thumb_tip -> z " ,thumb_MCP.z)
+    #    print(" thump tip -> x", thumb_ip.x , "thumb tip -> y ", thumb_ip.y, "thumb_tip -> z " ,thumb_ip.z) 
+    #    print(" thump tip -> x", thumb_tip.x , "thumb tip -> y ", thumb_tip.y, "thumb_tip -> z " ,thumb_tip.z)
 
        movement_fingers(CMC=thumb_CMC,MCP=thumb_MCP,IP=thumb_ip,TIP=thumb_tip)
+       movement_fingers(CMC=IndexFinger_DIP, MCP=IndexFinger_MCP,IP=IndexFinger_PIP,TIP=IndexFinger_Tip)
+       movement_fingers(CMC=MiddleFinger_DIP,MCP=MiddleFinger_MCP,IP=MiddleFinger_PIP,TIP=MiddleFinger_Tip)
+       movement_fingers(CMC=RingFinger_DIP,MCP=RingFinger_MCP,IP=MiddleFinger_PIP,TIP=RingFinger_Tip)
+       movement_fingers(CMC=PinkyFinger_DIP,MCP=PinkyFinger_MCP,IP=MiddleFinger_PIP,TIP=PinkyFinger_Tip)
 
 
 
