@@ -3,9 +3,10 @@ import mediapipe as mp
 from mediapipe.tasks.python import vision
 from callback import print_result
 from display_landmarks import OutputLandmarks
+import callback
 
 frame_global = None 
-cap = cv2.VideoCapture(0)
+cap = cv2.VideoCapture(1)
 # model declariation 
 model = "models/Hand Landmarker Task - Google AI Guide.task"
 
@@ -45,7 +46,10 @@ while True:
  #  cv2.circle(frame, (200, 200), 10, (0, 0, 255), -1)
    frame_timestamp_ms = int(cv2.getTickCount()/cv2.getTickFrequency() * 100)
    landMarker.detect_async(mp_image,frame_timestamp_ms)
+   if callback.latest_thumb_tip is not None:
+    OutputLandmarks(callback.latest_thumb_tip, frame)
    cv2.imshow("Camera", frame)
+
    if cv2.waitKey(1) & 0xFF == ord('q'):
        break
 

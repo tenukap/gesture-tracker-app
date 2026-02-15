@@ -1,7 +1,9 @@
 from gesture import movement_fingers
 from mediapipe.tasks.python.vision import HandLandmarkerResult
 import mediapipe as mp
+from display_landmarks import OutputLandmarks
 
+latest_thumb_tip = None
 
 def print_result(result: HandLandmarkerResult, output_image: mp.Image, timestamp_ms: int):
 #check if frame_global == frame 
@@ -70,4 +72,5 @@ def print_result(result: HandLandmarkerResult, output_image: mp.Image, timestamp
        movement_fingers(CMC=MiddleFinger_DIP,MCP=MiddleFinger_MCP,IP=MiddleFinger_PIP,TIP=MiddleFinger_Tip)
        movement_fingers(CMC=RingFinger_DIP,MCP=RingFinger_MCP,IP=RingFinger_PIP,TIP=RingFinger_Tip)
        movement_fingers(CMC=PinkyFinger_DIP,MCP=PinkyFinger_MCP,IP=PinkyFinger_PIP,TIP=PinkyFinger_Tip)
-       #OutputLandmarks(thumb_tip,frame_global)
+       global latest_thumb_tip
+       latest_thumb_tip = thumb_tip
