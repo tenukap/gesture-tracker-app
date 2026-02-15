@@ -85,12 +85,12 @@ def print_result(result: HandLandmarkerResult, output_image: mp.Image, timestamp
        movement_fingers(CMC=thumb_CMC,MCP=thumb_MCP,IP=thumb_ip,TIP=thumb_tip)
        movement_fingers(CMC=IndexFinger_DIP, MCP=IndexFinger_MCP,IP=IndexFinger_PIP,TIP=IndexFinger_Tip)
        movement_fingers(CMC=MiddleFinger_DIP,MCP=MiddleFinger_MCP,IP=MiddleFinger_PIP,TIP=MiddleFinger_Tip)
-       movement_fingers(CMC=RingFinger_DIP,MCP=RingFinger_MCP,IP=MiddleFinger_PIP,TIP=RingFinger_Tip)
+       movement_fingers(CMC=RingFinger_DIP,MCP=RingFinger_MCP,IP=RingFinger_PIP,TIP=RingFinger_Tip)
        movement_fingers(CMC=PinkyFinger_DIP,MCP=PinkyFinger_MCP,IP=PinkyFinger_PIP,TIP=PinkyFinger_Tip)
-       OutputLandmarks(thumb_tip,frames=output_image.numpy_view())
+       OutputLandmarks(thumb_tip,output_image.numpy_view())
   
-def OutputLandmarks(Tip,frames):
-    height,width,channels = frames.shape
+def OutputLandmarks(Tip,frame):
+    height,width,channels = frame.shape
     x_pixel  = int(Tip.x * width)
     y_pixel = int(Tip.y* height)
     cv2.circle(frame, (x_pixel, y_pixel), 8, (0, 0, 255), -1)
@@ -101,7 +101,6 @@ options = HandLandmarkerOptions(
     running_mode = VisionRunningMode.LIVE_STREAM,
     num_hands = 2 ,
     result_callback=print_result
-    
 )
 
 #initialize landMarker 
