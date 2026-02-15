@@ -2,9 +2,10 @@ import cv2
 import mediapipe as mp
 from mediapipe.tasks.python import vision
 from callback import print_result
+from display_landmarks import OutputLandmarks
 
 frame_global = None 
-cap = cv2.VideoCapture(1)
+cap = cv2.VideoCapture(0)
 # model declariation 
 model = "models/Hand Landmarker Task - Google AI Guide.task"
 
@@ -19,15 +20,8 @@ VisionRunningMode = mp.tasks.vision.RunningMode
 #where movement fingers funtion use to be
 
 #where print result function used to be
-  
-def OutputLandmarks(Tip,frame):
-    print("output function starting ")
-    height,width,channels = frame.shape
-    x_pixel  = int(Tip.x * width)
-    y_pixel = int(Tip.y* height)
-    cv2.circle(frame, (x_pixel, y_pixel), 8, (0, 0, 255), -1)
 
-
+#output landmarks function use to be 
 options = HandLandmarkerOptions( 
     base_options = BaseOptions(model_asset_path = model),
     running_mode = VisionRunningMode.LIVE_STREAM,
