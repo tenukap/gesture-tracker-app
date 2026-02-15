@@ -46,8 +46,9 @@ while True:
  #  cv2.circle(frame, (200, 200), 10, (0, 0, 255), -1)
    frame_timestamp_ms = int(cv2.getTickCount()/cv2.getTickFrequency() * 100)
    landMarker.detect_async(mp_image,frame_timestamp_ms)
-   if callback.latest_thumb_tip is not None:
-    OutputLandmarks(callback.latest_thumb_tip, frame)
+   if callback.Latest_hand_indexs is not None:
+    for index in callback.Latest_hand_indexs.values():
+        OutputLandmarks(index, frame)
    cv2.imshow("Camera", frame)
 
    if cv2.waitKey(1) & 0xFF == ord('q'):
