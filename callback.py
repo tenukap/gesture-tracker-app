@@ -78,6 +78,22 @@ def print_result(result: HandLandmarkerResult, output_image: mp.Image, timestamp
           "index-tip " : IndexFinger_Tip,
           "middle_tip" : MiddleFinger_Tip,
           "RingFinger-tip" : RingFinger_Tip,
-          "PinkyFinger-tip":PinkyFinger_Tip
+          "PinkyFinger-tip":PinkyFinger_Tip,
+          "thumb-CMC" : thumb_CMC,
+          "thumb_MCP" : thumb_MCP,
+          "thumb_ip" : thumb_ip,
+          "IndexFinger_DIP" :IndexFinger_DIP,
+          "IndexFinger_MCP" : IndexFinger_MCP,
+          "IndexFinger_PIP" : IndexFinger_PIP,
+          "RingFinger_DIP" :RingFinger_DIP,
+          "RingFinger_MCP" :RingFinger_MCP,
+          "RingFinger_PIP" :RingFinger_PIP,
+          "PinkyFinger_DIP" : PinkyFinger_DIP,
+          "PinkyFinger_MCP" :PinkyFinger_MCP,
+          "PinkyFinger_PIP" :PinkyFinger_PIP,
+          "MiddleFinger_DIP" :MiddleFinger_DIP,
+          "MiddleFinger_MCP" :MiddleFinger_MCP,
+          "MiddleFinger_PIP" :MiddleFinger_PIP
+
           }
        
