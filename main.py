@@ -40,6 +40,7 @@ while True:
    if not sucess:
     print("failded to open Camera")
     break 
+   frame = cv2.flip(frame,1)
    RGB_Frame = cv2.cvtColor(frame,cv2.COLOR_BGR2RGB)
    mp_image = mp.Image(image_format=mp.ImageFormat.SRGB, data=RGB_Frame)
       # test red dot (static position)
