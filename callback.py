@@ -4,6 +4,7 @@ import mediapipe as mp
 from display_landmarks import OutputLandmarks
 
 Latest_hand_indexs = None
+Latest_raw_landmarks = None
 
 def print_result(result: HandLandmarkerResult, output_image: mp.Image, timestamp_ms: int):
 #check if frame_global == frame 
@@ -27,6 +28,8 @@ def print_result(result: HandLandmarkerResult, output_image: mp.Image, timestamp
        handedness_info = result.handedness[index_hands][0]
        hand_type = handedness_info.category_name
        confidence_score = handedness_info.score 
+       global Latest_raw_landmarks
+       Latest_raw_landmarks = hand_landmarks
 
        print(" hand type ", hand_type)
        print("confidence score ", confidence_score)

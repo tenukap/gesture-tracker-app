@@ -1,8 +1,12 @@
 #finger movement detection function 
-def movement_fingers(CMC,MCP,IP,TIP):
-   if IP.x >0.5 and  MCP.x >0.5 and CMC.x >0.5 and TIP.x > 0.5 :
-          print("thumb is moving to the right")
-   elif IP.x ==0.5 and MCP.x == 0.5 and  CMC.x == 0.5 and TIP.x == 0.5 :
-        print("thumb is in the middle ") 
-   else:
-          print("thumb is moving to left")
+
+    
+class gesture_detector:
+
+       def __init__(self):
+              self.prev_avg_x = None 
+              self.cooldown_frames = 0
+              self.threshold = 0.04
+
+       def Four_finger_extended(self, landmark ):
+              pass
