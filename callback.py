@@ -67,11 +67,11 @@ def print_result(result: HandLandmarkerResult, output_image: mp.Image, timestamp
     #    print(" thump tip -> x", thumb_ip.x , "thumb tip -> y ", thumb_ip.y, "thumb_tip -> z " ,thumb_ip.z) 
     #    print(" thump tip -> x", thumb_tip.x , "thumb tip -> y ", thumb_tip.y, "thumb_tip -> z " ,thumb_tip.z)
 
-       movement_fingers(CMC=thumb_CMC,MCP=thumb_MCP,IP=thumb_ip,TIP=thumb_tip)
-       movement_fingers(CMC=IndexFinger_DIP, MCP=IndexFinger_MCP,IP=IndexFinger_PIP,TIP=IndexFinger_Tip)
-       movement_fingers(CMC=MiddleFinger_DIP,MCP=MiddleFinger_MCP,IP=MiddleFinger_PIP,TIP=MiddleFinger_Tip)
-       movement_fingers(CMC=RingFinger_DIP,MCP=RingFinger_MCP,IP=RingFinger_PIP,TIP=RingFinger_Tip)
-       movement_fingers(CMC=PinkyFinger_DIP,MCP=PinkyFinger_MCP,IP=PinkyFinger_PIP,TIP=PinkyFinger_Tip)
+    #    movement_fingers(CMC=thumb_CMC,MCP=thumb_MCP,IP=thumb_ip,TIP=thumb_tip)
+    #    movement_fingers(CMC=IndexFinger_DIP, MCP=IndexFinger_MCP,IP=IndexFinger_PIP,TIP=IndexFinger_Tip)
+    #    movement_fingers(CMC=MiddleFinger_DIP,MCP=MiddleFinger_MCP,IP=MiddleFinger_PIP,TIP=MiddleFinger_Tip)
+    #    movement_fingers(CMC=RingFinger_DIP,MCP=RingFinger_MCP,IP=RingFinger_PIP,TIP=RingFinger_Tip)
+    #    movement_fingers(CMC=PinkyFinger_DIP,MCP=PinkyFinger_MCP,IP=PinkyFinger_PIP,TIP=PinkyFinger_Tip)
        global Latest_hand_indexs
        Latest_hand_indexs = {
           "thumb-tip " : thumb_tip,

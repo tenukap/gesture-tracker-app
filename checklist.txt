@@ -1,0 +1,2 @@
+make camera priority and able to be run while other apps use camera
+make the gesture detection function 
