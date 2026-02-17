@@ -1,5 +1,4 @@
 #finger movement detection function 
-
     
 class gesture_detector:
 
@@ -10,3 +9,15 @@ class gesture_detector:
 
        def Four_finger_extended(self, landmark ):
               pass
+
+       def detect_swipe(landmarks):
+               
+               return(
+                     landmarks[8].y < landmarks[6].y and 
+                     landmarks[12].y < landmarks[10].y and 
+                     landmarks[16].y < landmarks[14].y  and
+                     landmarks [20].y < landmarks[18].y                      
+               )
+               avg_x = (landmarks[8].x + landmarks[12].x + landmarks[16].x + landmarks[20].x) / 4
+
+               

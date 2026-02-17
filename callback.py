@@ -28,6 +28,7 @@ def print_result(result: HandLandmarkerResult, output_image: mp.Image, timestamp
        handedness_info = result.handedness[index_hands][0]
        hand_type = handedness_info.category_name
        confidence_score = handedness_info.score 
+       #contains the Hand_landmarks as a global variable 
        global Latest_raw_landmarks
        Latest_raw_landmarks = hand_landmarks
 
@@ -63,18 +64,8 @@ def print_result(result: HandLandmarkerResult, output_image: mp.Image, timestamp
        PinkyFinger_PIP = hand_landmarks[18]
        PinkyFinger_DIP = hand_landmarks[19]
        PinkyFinger_Tip = hand_landmarks[20]
-    #    print("thump position ")
 
-    #    print(" thump tip -> x", thumb_CMC.x , "thumb tip -> y ", thumb_CMC.y, "thumb_tip -> z " ,thumb_CMC.z)
-    #    print(" thump tip -> x", thumb_MCP.x , "thumb tip -> y ", thumb_MCP.y, "thumb_tip -> z " ,thumb_MCP.z)
-    #    print(" thump tip -> x", thumb_ip.x , "thumb tip -> y ", thumb_ip.y, "thumb_tip -> z " ,thumb_ip.z) 
-    #    print(" thump tip -> x", thumb_tip.x , "thumb tip -> y ", thumb_tip.y, "thumb_tip -> z " ,thumb_tip.z)
-
-    #    movement_fingers(CMC=thumb_CMC,MCP=thumb_MCP,IP=thumb_ip,TIP=thumb_tip)
-    #    movement_fingers(CMC=IndexFinger_DIP, MCP=IndexFinger_MCP,IP=IndexFinger_PIP,TIP=IndexFinger_Tip)
-    #    movement_fingers(CMC=MiddleFinger_DIP,MCP=MiddleFinger_MCP,IP=MiddleFinger_PIP,TIP=MiddleFinger_Tip)
-    #    movement_fingers(CMC=RingFinger_DIP,MCP=RingFinger_MCP,IP=RingFinger_PIP,TIP=RingFinger_Tip)
-    #    movement_fingers(CMC=PinkyFinger_DIP,MCP=PinkyFinger_MCP,IP=PinkyFinger_PIP,TIP=PinkyFinger_Tip)
+    #indexs of Latest Hand indexes as a global variable 
        global Latest_hand_indexs
        Latest_hand_indexs = {
           "thumb-tip " : thumb_tip,
