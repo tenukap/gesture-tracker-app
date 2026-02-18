@@ -4,6 +4,7 @@ from mediapipe.tasks.python import vision
 from callback import print_result
 from display_landmarks import OutputLandmarks
 import callback
+from gesture import gesture_detector
 
 frame_global = None 
 cap = cv2.VideoCapture(1)
@@ -50,6 +51,8 @@ while True:
    if callback.Latest_hand_indexs is not None:
     for index in callback.Latest_hand_indexs.values():
         OutputLandmarks(index, frame)
+   direction = gesture_detector.detect_swipe(callback.Latest_raw_landmarks)    
+   print("swipe direction",direction)
    cv2.imshow("Camera", frame)
 
    if cv2.waitKey(1) & 0xFF == ord('q'):
