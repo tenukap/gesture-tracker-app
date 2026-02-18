@@ -24,7 +24,7 @@ class gesture_detector:
                 landmarks[8].x + landmarks[12].x + landmarks[16].x + landmarks[20].x
             ) / 4
 
-            if self.prev_avg_ is not None:
+            if self.prev_avg_x is not None:
 
                 dx = (
                     avg_x - self.prev_avg_x
@@ -36,6 +36,6 @@ class gesture_detector:
             self.prev_avg_x = avg_x
 
         else:
-            self.avg_prev_x = None
+            self.prev_avg_x = None
 
         return direction

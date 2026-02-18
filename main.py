@@ -7,7 +7,10 @@ import callback
 from gesture import gesture_detector
 
 frame_global = None 
-cap = cv2.VideoCapture(1)
+cap = cv2.VideoCapture(0)
+if not cap.isOpened():
+   print("Cam failed to open")
+   exit()
 # model declariation 
 model = "models/Hand Landmarker Task - Google AI Guide.task"
 
@@ -33,7 +36,7 @@ options = HandLandmarkerOptions(
 
 #initialize landMarker 
 landMarker = HandLandmarker.create_from_options(options)
-
+gesture = gesture_detector()
 
 # looping thorugh the frames 
 while True:
@@ -46,13 +49,15 @@ while True:
    mp_image = mp.Image(image_format=mp.ImageFormat.SRGB, data=RGB_Frame)
       # test red dot (static position)
  #  cv2.circle(frame, (200, 200), 10, (0, 0, 255), -1)
-   frame_timestamp_ms = int(cv2.getTickCount()/cv2.getTickFrequency() * 100)
+   frame_timestamp_ms = int(cv2.getTickCount()/cv2.getTickFrequency() * 1000)
    landMarker.detect_async(mp_image,frame_timestamp_ms)
    if callback.Latest_hand_indexs is not None:
     for index in callback.Latest_hand_indexs.values():
         OutputLandmarks(index, frame)
-   direction = gesture_detector.detect_swipe(callback.Latest_raw_landmarks)    
-   print("swipe direction",direction)
+    if callback.Latest_raw_landmarks is not None:
+       direction = gesture.detect_swipe(callback.Latest_raw_landmarks)   
+       if direction is not None:
+            print("swipe direction",direction)
    cv2.imshow("Camera", frame)
 
    if cv2.waitKey(1) & 0xFF == ord('q'):
