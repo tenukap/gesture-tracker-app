@@ -1,4 +1,3 @@
-from gesture import movement_fingers
 from mediapipe.tasks.python.vision import HandLandmarkerResult
 import mediapipe as mp
 from display_landmarks import OutputLandmarks

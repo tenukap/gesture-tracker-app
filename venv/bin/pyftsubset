@@ -1,5 +1,5 @@
 #!/bin/sh
-'''exec' "/Users/tenukaperera/Documents/personal projects/hand gesture tracker/venv/bin/python3.11" "$0" "$@"
+'''exec' "/Users/tenukaperera/Documents/personal projects/hand gesture tracker/venv/bin/python" "$0" "$@"
 ' '''
 import sys
 from fontTools.subset import main

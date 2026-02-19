@@ -8,10 +8,11 @@ class gesture_detector:
         self.cooldown_frames = 0
         self.threshold = 0.04
 
-    def Four_finger_extended(self, landmark):
+    def Four_finger_extended(self, landmarks):
         pass
 
-    def detect_swipe(landmarks, self):
+    def detect_swipe(self,landmarks):
+        print("working ")
         direction = None
         if (
             landmarks[8].y < landmarks[6].y

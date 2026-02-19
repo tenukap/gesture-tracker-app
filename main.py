@@ -7,7 +7,7 @@ import callback
 from gesture import gesture_detector
 
 frame_global = None 
-cap = cv2.VideoCapture(0)
+cap = cv2.VideoCapture(1)
 if not cap.isOpened():
    print("Cam failed to open")
    exit()
@@ -55,8 +55,10 @@ while True:
     for index in callback.Latest_hand_indexs.values():
         OutputLandmarks(index, frame)
     if callback.Latest_raw_landmarks is not None:
-       direction = gesture.detect_swipe(callback.Latest_raw_landmarks)   
-       if direction is not None:
+        print(callback.Latest_raw_landmarks)
+        print(type(callback.Latest_raw_landmarks))
+        direction = gesture.detect_swipe(landmarks=callback.Latest_raw_landmarks)   
+        if direction is not None:
             print("swipe direction",direction)
    cv2.imshow("Camera", frame)
 
