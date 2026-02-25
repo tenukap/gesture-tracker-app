@@ -44,14 +44,26 @@ while True:
    if not sucess:
     print("failded to open Camera")
     break 
+   
+   #flip frame to mirror view 
    frame = cv2.flip(frame,1)
+   #convert to BGR -> RGB
    RGB_Frame = cv2.cvtColor(frame,cv2.COLOR_BGR2RGB)
    mp_image = mp.Image(image_format=mp.ImageFormat.SRGB, data=RGB_Frame)
-      # test red dot (static position)
- #  cv2.circle(frame, (200, 200), 10, (0, 0, 255), -1)
+   
+   #time stamp in MS
    frame_timestamp_ms = int(cv2.getTickCount()/cv2.getTickFrequency() * 1000)
+
+   #detect hands in async
    landMarker.detect_async(mp_image,frame_timestamp_ms)
+
+   #process if hand detected 
    if callback.Latest_hand_indexs is not None:
+    count,fingers = gesture.count_fingers_extended(callback.Latest_raw_landmarks)
+    print("extended fingers", fingers)
+    print("count of fingers",count)
+    
+    #printing dots in landmarks
     for index in callback.Latest_hand_indexs.values():
         OutputLandmarks(index, frame)
     if callback.Latest_raw_landmarks is not None:

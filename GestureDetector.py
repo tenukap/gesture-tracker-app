@@ -32,6 +32,8 @@ class gesture_detector:
         count = sum(fingers.values())
         return count,fingers
 
+
+#detect swipes
     def detect_swipe(self,landmarks):
         print("working ")
         direction = None
