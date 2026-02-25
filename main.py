@@ -4,7 +4,7 @@ from mediapipe.tasks.python import vision
 from callback import print_result
 from display_landmarks import OutputLandmarks
 import callback
-from gesture import gesture_detector
+from GestureDetector import gesture_detector
 
 frame_global = None 
 cap = cv2.VideoCapture(1)

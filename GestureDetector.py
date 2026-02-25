@@ -2,12 +2,20 @@ class gesture_detector:
 
     def __init__(self):
         self.prev_avg_x = None
+        self.prev_avg_y = None
         self.cooldown_frames = 0
-        self.threshold = 0.04
+        self.threshold = 0.05
 
-    def Four_finger_extended(self, landmarks):
+        self.finger_threshold = 0.02
+
+#checks if finger extended
+    def is_fingers_extended(self, tip_landmarks, pip_landmarks):
+        is_extended = tip_landmarks > pip_landmarks
+        return is_extended
+    
+#detect which fingers extended
+    def which_fingers_extended(self, landmarks):
         fingers = {}
-    # Thumb: compare tip with IP joint (landmarks[4] vs landmarks[3])
         fingers['thumb'] = landmarks[4].x < landmarks[3].x  # Right hand example
 
         # Other fingers: tip y < pip y (y is vertical, origin at top)
@@ -17,6 +25,12 @@ class gesture_detector:
         fingers['pinky'] = landmarks[20].y < landmarks[18].y
 
         return fingers
+    
+    #count how many fingers extended 
+    def count_fingers_extended(self,landmarks):
+        fingers = self.which_fingers_extended(landmarks)
+        count = sum(fingers.values())
+        return count,fingers
 
     def detect_swipe(self,landmarks):
         print("working ")
@@ -27,13 +41,12 @@ class gesture_detector:
             ) / 4
 
         if self.prev_avg_x is not None:
-            dx = (avg_x - self.prev_avg_x)  # prev_avg_x is stored in your GestureDetector object
+            dx = (avg_x - self.prev_avg_x)
             if dx > self.threshold:
                 direction = "RIGHT"
             elif dx < -self.threshold:
-                    direction = "LEFT"
-            self.prev_avg_x = avg_x
-        else:
-            self.prev_avg_x = None
+                direction = "LEFT"
+        
+        self.prev_avg_x = avg_x
 
         return direction
