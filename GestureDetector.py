@@ -5,7 +5,6 @@ class gesture_detector:
         self.prev_avg_y = None
         self.cooldown_frames = 0
         self.threshold = 0.05
-
         self.finger_threshold = 0.02
 
 #checks if finger extended

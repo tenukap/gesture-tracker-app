@@ -22,15 +22,10 @@ HandLandmarkerOptions = mp.tasks.vision.HandLandmarkerOptions
 HandLandmarkerResult = mp.tasks.vision.HandLandmarkerResult
 VisionRunningMode = mp.tasks.vision.RunningMode
 
-#where movement fingers funtion use to be
-
-#where print result function used to be
-
-#output landmarks function use to be 
 options = HandLandmarkerOptions( 
     base_options = BaseOptions(model_asset_path = model),
     running_mode = VisionRunningMode.LIVE_STREAM,
-    num_hands = 2 ,
+    num_hands = 1,
     result_callback=print_result
 )
 
@@ -69,6 +64,7 @@ while True:
     if callback.Latest_raw_landmarks is not None:
         print(callback.Latest_raw_landmarks)
         print(type(callback.Latest_raw_landmarks))
+
         direction = gesture.detect_swipe(landmarks=callback.Latest_raw_landmarks)   
         if direction is not None:
             print("swipe direction",direction)
